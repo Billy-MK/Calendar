@@ -1,5 +1,6 @@
 var now = luxon.DateTime.local();
 var currentHour = now.hour;
+console.log(currentHour)
 
 $("#save9").on("click", function(event) {
     event.preventDefault;
@@ -55,36 +56,37 @@ $("#save17").on("click", function(event) {
     localStorage.setItem("comment17", comment17value);
 })
 
+// Sets the values (the text in the text boxes) to whatever is stored in local memory
+
 function init() {
-    var initComment9 = localStorage.getItem("comment9");
-    document.querySelector("#comment9").value = initComment9;
+    for (var i = 9; i < 17; i++) {
+        document.querySelector("#comment" + i).value = localStorage.getItem("comment" + i);
+        console.log(i);
+    }
+}
 
-    var initComment10 = localStorage.getItem("comment10");
-    document.querySelector("#comment10").value = initComment10;
+// Sets the color of the blocks based on the current time
 
-    var initComment11 = localStorage.getItem("comment11");
-    document.querySelector("#comment11").value = initComment11;
-
-    var initComment12 = localStorage.getItem("comment12");
-    document.querySelector("#comment12").value = initComment12;
-
-    var initComment13 = localStorage.getItem("comment13");
-    document.querySelector("#comment13").value = initComment13;
-
-    var initComment14 = localStorage.getItem("comment14");
-    document.querySelector("#comment14").value = initComment14;
-
-    var initComment15 = localStorage.getItem("comment15");
-    document.querySelector("#comment15").value = initComment15;
-
-    var initComment16 = localStorage.getItem("comment16");
-    document.querySelector("#comment16").value = initComment16;
-
-    var initComment17 = localStorage.getItem("comment17");
-    document.querySelector("#comment17").value = initComment17;
+function checkTime() {
+    for (var i = 0; i < 24; i++)
+        if (currentHour > i) {
+            $("#block" + i).css("background-color", "gray");
+            console.log(i);
+        } else {
+            if (currentHour === i) {
+                $("#block" + i).css("background-color", "palegoldenrod")
+                console.log(i);
+            } else{
+                if (currentHour < i) {
+                    $("#block" + i).css("background-color", "rgb(91, 214, 97)");
+                    console.log(i);
+                } 
+            }
+        }
 }
 
 init();
+checkTime();
 
 // WORKING DONT TOUCH
 
